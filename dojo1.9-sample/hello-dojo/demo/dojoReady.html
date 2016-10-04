@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Tutorial: Hello Dojo!</title>
+</head>
+<body>
+	<!-- load dojo and provide config via data attribute -->
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js" data-dojo-config="isDebug:1, async:1"></script>
+	<script>
+		require(["dojo/dom", "dojo/domReady!"], function(dom){
+			var greeting = dom.byId("greeting");
+			greeting.innerHTML += " from Dojo!";
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Express</title>
+</head>
+<body>
+<script type="text/javascript">
+var dojoConfig = {
+    baseUrl: '/js',
+    packages: [{
+         name: "myapp",
+         location: 'myapp'
+    }]
+};
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojo/dojo.js"></script>
+<script type="text/javascript">
+require([
+    'myapp/app',
+], function (app) {
+    app();
+});
+</script>
+</body>
+</html>

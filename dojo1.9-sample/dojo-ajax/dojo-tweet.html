@@ -1,0 +1,67 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Demo: dojo/request/script</title>
+		<link rel="stylesheet" href="style.css" media="screen">
+		<link rel="stylesheet" href="../../../resources/style/demo.css" media="screen">
+	</head>
+	<body>
+		<h1>Demo: dojo/request/script</h1>
+		<p>Click the button below to see dojo/request/script request recent tweets from twitter tagged with #dojo.</p>
+		<div>
+			<button class="action" id="tweetButton">#dojo tweets</button>
+		</div>
+		<br /><br />
+		<ul id="tweetsNode">
+		</ul>
+		<!-- load dojo -->
+		<script src="//ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js"></script>
+		<script>
+			require(["dojo/dom", "dojo/on", "dojo/request/script",
+					"dojo/dom-construct", "dojo/_base/array",
+					"dojo/domReady!"],
+				function(dom, on, script, domConstruct, arrayUtil){
+					var tweetsNode = dom.byId("tweetsNode");
+
+					// Attach the onclick event handler to tweetButton
+					on(dom.byId("tweetButton"), "click", function(evt){
+						// Request the tweets with #dojo tags from twitter.com
+						script.get("http://search.twitter.com/search.json", { //is not available
+							// Use the "callback" query parameter to tell
+							// Twitter's services the name of the function
+							// to wrap the data in
+							jsonp: "callback",
+							// Send some additional query parameters with
+							// the request
+							query: {
+								q:"#dojo",
+								lang:"en"
+							}
+						}).then(function(data){
+							// Empty the tweets node
+							domConstruct.empty(tweetsNode);
+
+							// Create a document fragment to keep from
+							// doing live DOM manipulation
+							var fragment = document.createDocumentFragment();
+
+							// Loop through each tweet and create a list item
+							// for it
+							arrayUtil.forEach(data.results, function(tweet){
+								domConstruct.create("li", {
+									innerHTML: tweet.text
+								}, fragment);
+							});
+
+							// Append the document fragment to the list
+							domConstruct.place(fragment, tweetsNode);
+						});
+					});
+				}
+			);
+		</script>
+	</body>
+</html>
+

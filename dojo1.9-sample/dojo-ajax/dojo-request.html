@@ -1,0 +1,44 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Demo: dojo/request/xhr</title>
+	</head>
+	<body>
+		<h1>Demo: dojo/request/xhr</h1>
+		<p>Click the button below to see dojo/request/xhr in action.</p>
+		<div>
+			<button id="textButton">Request Text File</button>
+		</div>
+		<br /><br />
+		<div id="resultDiv">
+		</div>
+		<!-- load dojo -->
+		<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js"></script>
+		<script>
+			require(["dojo/dom", "dojo/on", "dojo/request", "dojo/domReady!"],
+				function(dom, on, request){
+					// Results will be displayed in resultDiv
+					var resultDiv = dom.byId("resultDiv");
+
+					// Attach the onclick event handler to the textButton
+					on(dom.byId('textButton'), "click", function(evt){
+						// Request the text file
+						request.get("/../../dojo1.9-sample/dojo-ajax/psalm_of_life.txt").then(
+							function(response){
+								// Display the text file content
+								resultDiv.innerHTML = "<pre>" + response + "</pre>";
+							},
+							function(error){
+								// Display the error returned
+								resultDiv.innerHTML = "<div class=\"error\">" + error + "<div>";
+							}
+						);
+					});
+				}
+			);
+		</script>
+	</body>
+</html>
+

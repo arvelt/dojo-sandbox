@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: Hello Dojo!</title>
+</head>
+<body>
+    <h1 id="greeting">Hello</h1>
+    <!-- load Dojo -->
+	<!-- load dojo and provide config via data attribute -->
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojo/dojo.js" data-dojo-config="isDebug:true, async:true"></script>
+	<script>
+	require(["dojo/dom", "dojo/fx", "dojo/domReady!"], function(dom, fx){
+		// The piece we had before...
+		var greeting = dom.byId("greeting");
+		greeting.innerHTML += " from Dojo!";
+	 
+		// ...but now, with an animation!
+		fx.slideTo({
+		    top: 100,
+		    left: 200,
+		    node: greeting
+		}).play();
+	});
+	</script>
+</body>

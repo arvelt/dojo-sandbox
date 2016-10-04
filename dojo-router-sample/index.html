@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<button id='changeHash1'>Change Hash1</button>
+<button id='changeHash2'>Change Hash2</button>
+<div id="output"></div>
+
+<script type="text/javascript">
+var dojoConfig = {
+    baseUrl: '/js',
+    packages: [{
+         name: "myapp",
+         location: 'myapp'
+    }]
+};
+</script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojo/dojo.js"></script>
+<script type="text/javascript">
+require(["dojo/router", "dojo/dom", "dojo/on", "dojo/request", "dojo/json", "dojo/hash",  "dojo/topic", "dojo/domReady!"],
+function(router, dom, on, request, JSON, hash, topic) {
+    var url1 = 'foo/bar';
+    var url2 = 'huga/hoge';
+    router.register(url1, function(evt){
+        request.get("request/data.json", { handleAs: "json" })
+        .then(function(response){
+            dom.byId("output").innerHTML = JSON.stringify(response);
+        });
+    });
+    router.register(url2, function(evt){
+        request.get("request/data2.json", { handleAs: "json" })
+        .then(function(response){
+            dom.byId("output").innerHTML = JSON.stringify(response);
+        });
+    });
+
+    router.startup();
+
+    on(dom.byId("changeHash1"), "click", function(){
+        router.go(url1);
+    });
+    on(dom.byId("changeHash2"), "click", function(){
+        router.go(url2);
+    });
+});
+</script>
+</body>
+</html>

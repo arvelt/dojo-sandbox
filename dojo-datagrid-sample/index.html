@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body class="claro">
+<script type="text/javascript">
+var dojoConfig = {
+    baseUrl: '/js',
+    packages: [
+        {name: 'dijit', location: 'dojo/dijit'},
+        {name: 'dojo', location: 'dojo/dojo'},
+        {name: 'dojox', location: 'dojo/dojox'},
+        {name: 'myapp', location: 'myapp'}
+    ]
+};
+</script>
+<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/dojo/1.9.3/dijit/themes/claro/claro.css'>
+<link rel='stylesheet' href='http://ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojox/grid/resources/claroGrid.css'>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.9.3/dojo/dojo.js"></script>
+<script type="text/javascript">
+require([
+    'myapp/app',
+], function (app) {
+    app();
+});
+</script>
+</body>
+</html>
